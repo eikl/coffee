@@ -17,5 +17,5 @@
 
 # Introduction
 Many students of Kumpula's physics building find themselves pondering the question: <br>
-"_Is there coffee at OH right now?_"
+"_Is there coffee at OH right now?_"<br>
 This project aims to answer that question, and more.
