@@ -3,7 +3,10 @@ import time
 import datetime as dt
 import numpy as np
 import pymysql
- 
+import super_secret
+
+
+DATABASE_URL = super_secret.DATABASE_URL
 #set GPIO Pins
 GPIO_TRIGGER = 24
 GPIO_ECHO = 25
