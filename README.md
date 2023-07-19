@@ -14,3 +14,8 @@
    3. ['calibration_plot.py'](#calibrationplot)
 4. [Database structure](#data)
 5. [Future plans](#future)
+
+# Introduction
+Many students of Kumpula's physics building find themselves pondering the question:
+"_Is there coffee at OH right now?_"
+This project aims to answer that question, and more.
