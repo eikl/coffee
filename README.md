@@ -1,14 +1,16 @@
 
 
 # Coffee level monitoring application
-## Dependencies
 
-### 'srf05.py'
-The script uses the following Python libraries:
+# Table of Contents
 
-RPi.GPIO: For controlling the GPIO pins on a Raspberry Pi.
-time: For working with times, and for converting between representations.
-datetime: For manipulating dates and times.
-numpy: For support of large, multi-dimensional arrays and matrices, along with mathematical functions to operate on these arrays.
-pymysql: A pure-Python MySQL client library.
-
+1. [Introduction](#introduction)
+   1. [Functionality](#functionality)
+2. [Hardware](#hardware)
+   1. [Calibration procedure](#calibration)
+3. [Software](#software)
+   1. ['srf05.py'](#rpi script)
+   2. ['flask_app.py'](#flask app)
+   3. ['calibration_plot.py'](#calibration plot)
+4. [Database structure](#data)
+5. [Future plans](#future)
