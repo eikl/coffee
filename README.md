@@ -4,6 +4,7 @@
 
 # Table of Contents
 
+
 - [Coffee level monitoring application](#coffee-level-monitoring-application)
 - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
@@ -11,11 +12,13 @@
     - [Calibration procedure](#calibration-procedure)
         - [pic of plot and setup](#pic-of-plot-and-setup)
   - [Software](#software)
+  - [Database structure](#database-structure)
+  - [Todo](#todo)
 
 ## Introduction
 Many students of Kumpula's physics building find themselves pondering the question: <br><br>
 "_Is there coffee at OH right now?_"<br><br>
-This project aims to answer that question, and more.
+This project aims to answer that question by implementing IoT functionality into OH:s Moccamaster.
 <br><br>
 ## Hardware
 At the heart of this project is the Raspberry Pi computer equipped with the SRF-05 ultrasonic distance sensor. With this sensor we can effectively measure the amount of liquid (coffee) in the pan at any moment.
@@ -36,3 +39,22 @@ Once we know this relationship, we can calculate the level of liquid from the me
 
 ## Software
 The project consists of two main programs, `srf05.py` and `flask_app.py`. The former does the actual measurement and calculation of the coffee consumption. It then sends this data to our database. <br> The latter fetches this data from our database, and displays it in a web app.
+<br><br>
+
+## Database structure
+The data produced by the RPi is stored in a MySQL database. The database has two tables, level_data and consumption_data:
+| level_data      |               |
+| --------------- |:-------------:|
+| date (datetime) | level (float) | 
+
+| consumption_data |
+| ---------------- |
+| volume (float)   |
+
+
+## Todo 
+* Mechanical design of parts to attach sensor and RPi to the Moccamaster
+* Documentation of the calibration procedure
+* Make the css/html code that makes the webpage nice to look at
+* Figure out how to host the webpage with AWS
+* Figure out how to get internet in OH
