@@ -33,3 +33,6 @@ plt.scatter(avgs,names)
 plt.plot(x,linear(x,k,b))
 print(f"volume={k}*distance+{b}")
 plt.show()
+
+files = glob.glob('D:\coffee_level\calibration')
+print(files)
