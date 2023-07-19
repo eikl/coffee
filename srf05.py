@@ -3,7 +3,7 @@ import time
 import datetime as dt
 import numpy as np
 import pymysql
- 
+import super_secret
 #set GPIO Pins
 GPIO_TRIGGER = 24
 GPIO_ECHO = 25
@@ -15,8 +15,7 @@ GPIO.setup(GPIO_ECHO, GPIO.IN)
 
 #connect to jeff bezos
 
-db = pymysql.connect(host='coffee-data.c1uqaxg5dghw.eu-north-1.rds.amazonaws.com', user='admin', password='salasana')
-
+db = super_secret.db
 cursor = db.cursor()
 cursor.execute('USE srf05_data')
 def distance():
