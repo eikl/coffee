@@ -16,6 +16,6 @@
 5. [Future plans](#future)
 
 # Introduction
-Many students of Kumpula's physics building find themselves pondering the question:
+Many students of Kumpula's physics building find themselves pondering the question: <br>
 "_Is there coffee at OH right now?_"
 This project aims to answer that question, and more.
