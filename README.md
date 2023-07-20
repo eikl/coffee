@@ -45,6 +45,7 @@ The required dependencies are listed in `requirements.txt`, and can be installed
 
 ## Database structure
 The data produced by the RPi is stored in a MySQL database. The database has two tables, level_data and consumption_data:
+
 | level_data      |               |
 | --------------- |:-------------:|
 | date (datetime) | level (float) | 
@@ -60,3 +61,4 @@ The data produced by the RPi is stored in a MySQL database. The database has two
 * Make the css/html code that makes the webpage nice to look at
 * Figure out how to host the webpage with AWS
 * Figure out how to get internet in OH
+* Maybe implement a CO2 and TVOC (total volatile organic compound) sensor to create a sort of "pöhinäkerroin"
