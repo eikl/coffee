@@ -39,6 +39,8 @@ Once we know this relationship, we can calculate the level of liquid from the me
 
 ## Software
 The project consists of two main programs, `srf05.py` and `flask_app.py`. The former does the actual measurement and calculation of the coffee consumption. It then sends this data to our database. <br> The latter fetches this data from our database, and displays it in a web app.
+### Required dependencies
+The required dependencies are listed in `requirements.txt`, and can be installed with the command `pip install -r requirements.txt`. Note that `srf05.py` uses the `RPi.GPIO` library, which is preinstalled on most Raspberry Pi SBC:s
 <br><br>
 
 ## Database structure
