@@ -31,12 +31,12 @@ The distance sensor must be positioned in such a way that:
 To achieve this, modifications may have to be made to the coffee machine.
 
 ### Calibration procedure
-To calibrate the instrument, we compare the distance reading of the SRF-05 to some "precisely" measured volume of liquid. The relationship between the measured distance from the sensor and liquid level in the pan is not linear, and is probably easiest to find by interpolation. Testing is ongoing.
+To calibrate the instrument, we compare the distance reading of the SRF-05 to some "precisely" measured volume of liquid. Once we have determined the relationship between the volume of coffee and the distance measured by the sensor (it should be quite close to linear), we can simply calculate the volume of coffee based on the distance.
 ##### pic of plot and setup
 <br>
-Once we know this relationship, we can calculate the level of liquid from the measured distance. This is done by adding the fitting parameters to the function `insert_function_name()` in `srf05.py`.
-<br><br>
 
+This is done by adding the fitting parameters to the function `insert_function_name()` in `srf05.py`.
+<br><br>
 ## Software
 The project consists of two main programs, `srf05.py` and `flask_app.py`. The former does the actual measurement and calculation of the coffee consumption. It then sends this data to our database. <br> The latter fetches this data from our database, and displays it in a web app.
 ### Required dependencies
