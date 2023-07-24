@@ -5,4 +5,7 @@
     <p>Mittausaika: {{ date }}</p>
     <p>Kahvin määrä: {{ level }}</p>
     <p>Kahvin kulutus tähän mennessä: {{ consumption }}ml</p>
+    <!-- Embed Bokeh plot. -->
+    {{ script | safe }}
+    {{ div | safe }}
 {% endblock %}
