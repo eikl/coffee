@@ -62,3 +62,4 @@ The data produced by the RPi is stored in a MySQL database. The database has two
 * Figure out how to host the webpage with AWS
 * Figure out how to get internet in OH
 * Maybe implement a CO2 and TVOC (total volatile organic compound) sensor to create a sort of "pöhinäkerroin"
+* Once this first prototype with RPi is working and calibrated, start thinking about the second version, and the possibility of a smaller microcontroller that is battery powered and embedded in the coffee pans handle
