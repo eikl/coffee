@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.0.min.js"></script>
+    <title>Flask App</title>
+    <style>
+        body {
+            background-color: #2f3640;
+            color: #f5f6fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
