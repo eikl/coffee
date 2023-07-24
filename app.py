@@ -59,7 +59,8 @@ def plot():
                x_axis_type="datetime",
                width=700,
                height=400,
-               background_fill_color='#2f3640')
+               background_fill_color='#2f3640',
+               sizing_mode="stretch_width")
 
     # Set other visual attributes 
     p.title.text_color = "White"
@@ -102,3 +103,4 @@ def show_latest_data():
     consumption = str(consumption).strip('(),')
     return render_template('index.html', date=date, level=level, consumption=consumption,
                            script=script,div=div)
+
