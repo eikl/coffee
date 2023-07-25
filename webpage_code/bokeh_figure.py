@@ -1,4 +1,4 @@
-from bokeh.sampledata.glucose import data
+
 from bokeh.themes import Theme
 from bokeh.plotting import figure
 import pandas as pd
@@ -10,15 +10,13 @@ import sql_queries
 
 def plot():
     # Prepare some data
-    #download()
+
     df = sql_queries.get_level_data()
     #
     # Try to get the last hour, if there is no data, return an empty dataframe
-    #
-    try:
-        df = df[dt.datetime.now()-dt.timedelta(hours=1),dt.datetime.now()]
-    except KeyError:
-        df = pd.DataFrame(columns=["date","level"])
+
+    #df = df[dt.datetime.now()-dt.timedelta(minutes=1),dt.datetime.now()]
+
 
     #sample data
     #df = data
