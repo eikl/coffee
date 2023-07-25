@@ -55,7 +55,7 @@ if __name__ == '__main__':
                 for i in range(5):
                     dist = distance()
                     distances.append(dist)
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                 now = dt.datetime.now()
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
                 avg_distance = np.average(distances)
