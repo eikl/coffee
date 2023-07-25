@@ -16,5 +16,5 @@ def home():
     return render_template('index.html', date=date, level=level, consumption=consumption,
                            script=script,div=div)
 
-if __name__ == "__main":
-    app.run()
+if __name__ == "__main__":
+    app.run(host='0.0.0.0',port=8080)
