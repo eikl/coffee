@@ -8,7 +8,7 @@ engine = create_engine(DATABASE_URL)
 
 def get_level_data():
     with engine.connect() as connection:
-        query = text("SELECT * FROM level_data")
+        query = text("SELECT * FROM level_data ORDER BY date DESC LIMIT 60")
         data = connection.execute(query)
         dates = []
         levels = []
@@ -18,6 +18,7 @@ def get_level_data():
         df = pd.DataFrame()
         df.insert(loc=0,column="date",value=dates)
         df.insert(loc=1,column="level",value=levels)
+        df["date"] = pd.to_datetime(df["date"])
     return df
 
 def get_latest_level():
