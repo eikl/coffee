@@ -30,9 +30,3 @@ def get_latest_level():
             latest_date = date
             latest_level = level
         return (latest_date.strftime('%m/%d/%Y %H:%M:%S'),str(latest_level))
-    
-def calculate_consumption():
-    with engine.connect() as connection:
-        query = text('SELECT SUM(volume) FROM consumption_data')
-        data = connection.execute(query)
-        return data.first()
