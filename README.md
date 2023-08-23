@@ -21,7 +21,7 @@ Many students of Kumpula's physics building find themselves pondering the questi
 This project aims to answer that question by implementing IoT functionality into OH:s Moccamaster.
 <br><br>
 ## Hardware
-At the heart of this project is the Raspberry Pi computer equipped with the SRF-05 ultrasonic distance sensor. With this sensor we can effectively measure the amount of liquid (coffee) in the pan at any moment.
+At the heart of this project is the Raspberry Pi computer equipped with the VL53L0X time-of-flight laser distance sensor. With this sensor we can effectively measure the amount of liquid (coffee) in the pan at any moment.
 <br>
 The distance sensor must be positioned in such a way that:
 * It can always see the liquid surface
@@ -31,14 +31,30 @@ The distance sensor must be positioned in such a way that:
 To achieve this, modifications may have to be made to the coffee machine.
 
 ### Calibration procedure
-To calibrate the instrument, we compare the distance reading of the SRF-05 to some "precisely" measured volume of liquid. Once we have determined the relationship between the volume of coffee and the distance measured by the sensor (it should be quite close to linear), we can simply calculate the volume of coffee based on the distance.
+To calibrate the instrument, we compare the distance reading of the VL53L0X to some "precisely" measured volume of liquid. Once we have determined the relationship between the volume of coffee and the distance measured by the sensor (it should be quite close to linear), we can simply calculate the volume of coffee based on the distance.
 ##### pic of plot and setup
 <br>
 
 This is done by adding the fitting parameters to the function `insert_function_name()` in `srf05.py`.
 <br><br>
 ## Software
-The project consists of two main programs, `srf05.py` and `flask_app.py`. The former does the actual measurement and calculation of the coffee consumption. It then sends this data to our database. <br> The latter fetches this data from our database, and displays it in a web app.
+The program is split into two folders, webpage_code and RPi_code.
+#RPi_code
+This folder contains code that is run on the Raspberry Pi.<br>
+`srf05.py`
+<br><br>
+`distance()`
+<br>
+This function uses the included library for the VL53L0X sensor to determine the distance between the coffee and the sensor.
+<br>
+`calibration(distance)`
+<br>
+This function takes distance in millimeters as an input, and returns the level of coffee based on a calibration.
+<br>
+`main`
+<br>
+In the main loop the program writes the measurement time and result into a database.
+<br>
 ### Required dependencies
 The required dependencies are listed in `requirements.txt`, and can be installed with the command `pip install -r requirements.txt`. Note that `srf05.py` uses the `RPi.GPIO` library, which is preinstalled on most Raspberry Pi SBC:s
 <br><br>
