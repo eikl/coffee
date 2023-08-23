@@ -3,3 +3,4 @@ __pycache__/
 calibration_plot.py
 .gitignore
 .gitattributes
+/venv/

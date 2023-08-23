@@ -9,7 +9,7 @@ engine = create_engine(DATABASE_URL)
 
 def get_level_data():
     with engine.connect() as connection:
-        query = text("SELECT * FROM level_data ORDER BY date DESC LIMIT 60")
+        query = text("SELECT * FROM level_data ORDER BY date DESC LIMIT 100")
         data = connection.execute(query)
         dates = []
         levels = []

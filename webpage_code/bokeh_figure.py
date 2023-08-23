@@ -1,6 +1,6 @@
 
 from bokeh.themes import Theme
-from bokeh.plotting import figure
+from bokeh.plotting import figure, show
 import pandas as pd
 from bokeh.sampledata import download
 from bokeh.embed import components
@@ -17,25 +17,26 @@ def plot():
 
     x = pd.to_datetime(df["date"])
     y = df["level"]
-    print(x)
+    y = y.rolling(window=3).mean()
     # Create a new plot with a dark background
     p = figure(x_axis_label='Aika', 
                y_axis_label='Tilavuus (ml)',
-               x_axis_type="datetime",
+               x_axis_type = 'datetime',
                width=700,
                height=400,
                background_fill_color = '#2f3640',
                border_fill_color = '#2f3640',
                outline_line_color = '#2f3640',
                y_range = Range1d(0,10),
-               active_drag = None,
-               active_scroll = None,
-               active_tap = None
+               #active_drag = None,
+               #active_scroll = None,
+               #active_tap = None
                )
     
- 
+    print(p.xaxis[0].formatter)
     # Add a line renderer with legend and line thickness
-    p.circle(x, y, line_width=2, line_color="#f5f6fa")
+    p.xaxis[0].formatter = DatetimeTickFormatter(hours = '%R',days = '%d/%m',minsec='%H:%M:%S')
+    p.line(x, y, line_width=2, line_color="#f5f6fa")
     p.yaxis[0].formatter = NumeralTickFormatter(format='0.00')
     p.toolbar_location = None
     p.toolbar.logo = None
