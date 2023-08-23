@@ -33,14 +33,6 @@ if __name__ == '__main__':
         file.write('time,distance\n')
         try:
             while True:
-<<<<<<< Updated upstream
-                distances = []
-                for i in range(5):
-                    dist = distance()
-                    distances.append(dist)
-                    time.sleep(0.1)
-=======
->>>>>>> Stashed changes
                 now = dt.datetime.now()
                 dist = distance()
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
