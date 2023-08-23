@@ -11,8 +11,11 @@ application = Flask(__name__)
 def home():
     script,div = bokeh.plot()
     date,level = sql_queries.get_latest_level()
+    atm_df = sql_queries.get_atm_data()
+    temperature = round(float(atm_df["temp"]),1)
+    print(atm_df)
     return render_template('index.html', date=date, level=level,
-                           script=script,div=div)
+                           script=script,div=div,temperature=temperature)
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0',port=8080)
