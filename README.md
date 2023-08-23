@@ -36,7 +36,7 @@ To calibrate the instrument, we compare the distance reading of the VL53L0X to s
 ![alt text](images/cal.png)
 <br>
 
-This is done by adding the fitting parameters to the function `insert_function_name()` in `srf05.py`.
+This is done by adding the fitting parameters to the function `calibration()` in `srf05.py`.
 <br><br>
 ## Software
 The program is split into two folders, webpage_code and RPi_code.
