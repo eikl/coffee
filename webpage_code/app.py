@@ -3,11 +3,11 @@ import pandas as pd
 import datetime as dt
 import sql_queries
 import bokeh_figure as bokeh
-app = Flask(__name__)
+application = Flask(__name__)
 #
 # This gives the latest coffee level
 #
-@app.route('/')
+@application.route('/')
 def home():
     script,div = bokeh.plot()
     date,level = sql_queries.get_latest_level()
@@ -17,4 +17,4 @@ def home():
                            script=script,div=div)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=8080)
+    application.run(host='0.0.0.0',port=8080)
