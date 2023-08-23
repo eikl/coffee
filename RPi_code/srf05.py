@@ -35,7 +35,7 @@ def distance():
         distance = tof.get_distance()
         if distance > 0:
             print(f'distance from sensor is {distance}')
-            return (distance/10)*-1.182135711619752+17.904981518515626
+            return calibration(distance)
         time.sleep(timing/1000000)
     tof.stop_ranging()
  
