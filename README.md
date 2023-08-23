@@ -40,15 +40,20 @@ This is done by adding the fitting parameters to the function `insert_function_n
 ## Software
 The program is split into two folders, webpage_code and RPi_code.
 #RPi_code
-This folder contains code that is run on the Raspberry Pi.
-#`srf05.py`
+This folder contains code that is run on the Raspberry Pi.<br>
+`srf05.py`
+<br>
 `distance()`
+<br>
 This function uses the included library for the VL53L0X sensor to determine the distance between the coffee and the sensor.
+<br>
 `calibration(distance)`
+<br>
 This function takes distance in millimeters as an input, and returns the level of coffee based on a calibration.
+<br>
 `main`
 In the main loop the program writes the measurement time and result into a database.
-
+<br>
 ### Required dependencies
 The required dependencies are listed in `requirements.txt`, and can be installed with the command `pip install -r requirements.txt`. Note that `srf05.py` uses the `RPi.GPIO` library, which is preinstalled on most Raspberry Pi SBC:s
 <br><br>
