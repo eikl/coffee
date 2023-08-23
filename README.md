@@ -56,6 +56,21 @@ This function takes distance in millimeters as an input, and returns the level o
 <br>
 In the main loop the program writes the measurement time and result into a database.
 <br>
+<br>
+#webpage_code
+This folder contains code that runs the web app. Most of the heavy lifting is done in `sql_queries.py` and `bokeh_figure.py`
+<br>
+`sql_queries.py`
+<br>
+`get_level_data()`
+<br>
+This function gets the last 100 data points from the database table which contains the level data. it returns the data in a pandas dataframe.
+<br>
+`get_latest_level()`
+<br>
+This function gets the latest datapoint from the level data
+<br><br>
+``
 ### Required dependencies
 The required dependencies are listed in `requirements.txt`, and can be installed with the command `pip install -r requirements.txt`. Note that `srf05.py` uses the `RPi.GPIO` library, which is preinstalled on most Raspberry Pi SBC:s
 <br><br>
