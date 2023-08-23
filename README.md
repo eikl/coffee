@@ -32,7 +32,8 @@ To achieve this, modifications may have to be made to the coffee machine.
 
 ### Calibration procedure
 To calibrate the instrument, we compare the distance reading of the VL53L0X to some "precisely" measured volume of liquid. Once we have determined the relationship between the volume of coffee and the distance measured by the sensor (it should be quite close to linear), we can simply calculate the volume of coffee based on the distance.
-##### pic of plot and setup
+<br><br>
+![alt text](https://github.com/eikl/coffee_level/blob/main/cal.png?raw=true)
 <br>
 
 This is done by adding the fitting parameters to the function `insert_function_name()` in `srf05.py`.
