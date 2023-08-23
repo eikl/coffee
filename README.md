@@ -42,7 +42,7 @@ The program is split into two folders, webpage_code and RPi_code.
 #RPi_code
 This folder contains code that is run on the Raspberry Pi.<br>
 `srf05.py`
-<br>
+<br><br>
 `distance()`
 <br>
 This function uses the included library for the VL53L0X sensor to determine the distance between the coffee and the sensor.
@@ -52,6 +52,7 @@ This function uses the included library for the VL53L0X sensor to determine the 
 This function takes distance in millimeters as an input, and returns the level of coffee based on a calibration.
 <br>
 `main`
+<br>
 In the main loop the program writes the measurement time and result into a database.
 <br>
 ### Required dependencies
