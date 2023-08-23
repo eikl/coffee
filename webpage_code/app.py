@@ -12,7 +12,7 @@ def home():
     script,div = bokeh.plot()
     date,level = sql_queries.get_latest_level()
     atm_df = sql_queries.get_atm_data()
-    temperature = round(float(atm_df["temp"]),1)
+    temperature = round(float(atm_df["temp"].iloc[-1]),1)
     print(atm_df)
     return render_template('index.html', date=date, level=level,
                            script=script,div=div,temperature=temperature)

@@ -33,7 +33,7 @@ def get_latest_level():
 
 def get_atm_data():
     with engine.connect() as connection:
-        query = text('SELECT * FROM atm_data ORDER BY date DESC LIMIT 1')
+        query = text('SELECT * FROM atm_data ORDER BY date DESC LIMIT 100')
         data = connection.execute(query)
         dates = []
         temps = []
