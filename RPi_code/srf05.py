@@ -14,6 +14,17 @@ cursor.execute('USE srf05_data')
 
 #create a laser tof sensor object
 tof = VL53L0X.VL53L0X()
+
+def calibration(distance):
+    #
+    # This function calculates the ammount of coffee in the pan
+    # based on a calibration
+    # The calibration procedure is described in README.md
+    k = -1.182135711619752
+    b = 17.904981518515626
+    ammount_of_coffee = (distance/10)*k+b
+    return ammount_of_coffee
+
 def distance():
     tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
     timing = tof.get_timing()
