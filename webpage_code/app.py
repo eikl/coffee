@@ -11,9 +11,7 @@ application = Flask(__name__)
 def home():
     script,div = bokeh.plot()
     date,level = sql_queries.get_latest_level()
-    consumption = sql_queries.calculate_consumption()
-    consumption = str(consumption).strip('(),')
-    return render_template('index.html', date=date, level=level, consumption=consumption,
+    return render_template('index.html', date=date, level=level,
                            script=script,div=div)
 
 if __name__ == "__main__":
