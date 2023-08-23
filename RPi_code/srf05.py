@@ -3,69 +3,54 @@ import time
 import datetime as dt
 import numpy as np
 import pymysql
- 
-#set GPIO Pins
-GPIO_TRIGGER = 24
-GPIO_ECHO = 25
- 
-#set GPIO direction (IN / OUT)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-GPIO.setup(GPIO_ECHO, GPIO.IN)
+import super_secret 
+import VL53L0X
 
 #connect to jeff bezos
 
 db = super_secret.db
 cursor = db.cursor()
 cursor.execute('USE srf05_data')
+
+#create a laser tof sensor object
+tof = VL53L0X.VL53L0X()
 def distance():
-	# set Trigger to HIGH
-	GPIO.output(GPIO_TRIGGER, True)
- 
-	# set Trigger after 0.01ms to LOW
-	time.sleep(0.00001)
-	GPIO.output(GPIO_TRIGGER, False)
- 
-	StartTime = time.time()
-	StopTime = time.time()
- 
-	# save StartTime
-	while GPIO.input(GPIO_ECHO) == 0:
-		StartTime = time.time()
- 
-	# save time of arrival
-	while GPIO.input(GPIO_ECHO) == 1:
-		StopTime = time.time()
- 
-	# time difference between start and arrival
-	TimeElapsed = StopTime - StartTime
-	# multiply with the sonic speed (34300 cm/s)
-	# and divide by 2, because there and back
-    # ignore the effect of hot air on the speed of sound
-	distance = (TimeElapsed * 34300) / 2
- 
-	return distance
+    tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
+    timing = tof.get_timing()
+    if (timing<20000):
+        timing = 20000
+    print(f'timing {timing} ms')
+    for count in range(100):
+        distance = tof.get_distance()
+        if distance > 0:
+            print(f'distance from sensor is {distance}')
+            return (distance/10)*-1.182135711619752+17.904981518515626
+        time.sleep(timing/1000000)
+    tof.stop_ranging()
  
 if __name__ == '__main__':
     with open('out.txt','w') as file:
         file.write('time,distance\n')
         try:
             while True:
+<<<<<<< Updated upstream
                 distances = []
                 for i in range(5):
                     dist = distance()
                     distances.append(dist)
                     time.sleep(0.1)
+=======
+>>>>>>> Stashed changes
                 now = dt.datetime.now()
+                dist = distance()
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
-                avg_distance = np.average(distances)
-                print(f"distance from sensor is {np.average(distances)}")
                 #write the distance and time to aws database
                 cursor.execute('''
                 insert into level_data(date,level) values (%s,%s)
-                ''',(current_date,avg_distance))
+                ''',(current_date,dist))
                 db.commit()
-	    # Reset by pressing CTRL + C
+                print(f'distance from sensor is {distance}')
+        # Reset by pressing CTRL + C
         except KeyboardInterrupt:
             print("Measurement stopped by User")
             GPIO.cleanup()
