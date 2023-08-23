@@ -1,9 +1,10 @@
 import super_secret
 from sqlalchemy import text, create_engine
 import pandas as pd
-
+from flask_sqlalchemy import SQLAlchemy
 
 DATABASE_URL = super_secret.DATABASE_URL
+
 engine = create_engine(DATABASE_URL)
 
 def get_level_data():
