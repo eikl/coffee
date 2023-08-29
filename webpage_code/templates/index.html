@@ -2,9 +2,7 @@
 
 {% block content %}
     <h1>OH:n kahvitilanne</h1>
-    <p>Mittausaika: {{ date }}</p>
-    <p>Kahvin määrä: {{ level }} kuppia</p>
-    <p>Lämpötila: {{ temperature }}&deg;C</p>
+    <p>Kun kello löi {{ date }} kahvia oli pannussa {{ level }} kuppia.</p>
     <!-- Embed Bokeh plot. -->
     {{ script | safe }}
     {{ div | safe }}
