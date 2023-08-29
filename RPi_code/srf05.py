@@ -55,9 +55,10 @@ if __name__ == '__main__':
         file.write('time,distance\n')
         try:
             while True:
+                #Get the time before the measuremnet starts
                 now = dt.datetime.now()
-                dist = distance(sample_length=sample_number)
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
+                dist = distance(sample_length=sample_number)
                 #write the distance and time to aws database
                 cursor.execute('''
                 insert into level_data(date,level) values (%s,%s)
