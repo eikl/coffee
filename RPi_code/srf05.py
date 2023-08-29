@@ -3,6 +3,7 @@ import time
 import datetime as dt
 import numpy as np
 import pymysql
+import super_secret
  
 #set GPIO Pins
 GPIO_TRIGGER = 24
