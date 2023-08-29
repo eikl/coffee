@@ -1,10 +1,12 @@
 import RPi.GPIO as GPIO
 import time
+import busio
+import board
+import adafruit_vl53l0x
 import datetime as dt
 import numpy as np
 import pymysql
 import super_secret 
-import VL53L0X
 
 #connect to jeff bezos
 
@@ -12,8 +14,18 @@ db = super_secret.db
 cursor = db.cursor()
 cursor.execute('USE srf05_data')
 
-#create a laser tof sensor object
-tof = VL53L0X.VL53L0X()
+#
+# Initialize i2c bus and sensor
+#
+
+i2c = busio.I2C(board.SCL, board.SDA)
+vl53 = adafruit_vl53l0x.VL53L0X(i2c)
+
+#
+# Set timing for slower, but more accurate measurement
+#
+
+vl53.measurement_timing_budget = 200000
 
 def calibration(distance):
     #
@@ -25,28 +37,28 @@ def calibration(distance):
     ammount_of_coffee = (distance/10)*k+b
     return ammount_of_coffee
 
-def distance():
-    tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
-    timing = tof.get_timing()
-    if (timing<20000):
-        timing = 20000
-    print(f'timing {timing} ms')
-    for count in range(100):
-        distance = tof.get_distance()
-        if distance > 0:
-            print(f'distance from sensor is {distance}')
-            return calibration(distance)
-        time.sleep(timing/1000000)
-    tof.stop_ranging()
+def distance(sample_length):
+    samples = []
+    # take i measurements, 1 measurement is 1 second
+    for i in range(sample_length):
+        samples.append(vl53.range)
+    # return the average
+    return np.average(samples)
+
  
 if __name__ == '__main__':
+    #
+    # Take 10 1 second samples
+    #
+    sample_number = 10
     with open('out.txt','w') as file:
         file.write('time,distance\n')
         try:
             while True:
+                #Get the time before the measuremnet starts
                 now = dt.datetime.now()
-                dist = distance()
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
+                dist = distance(sample_length=sample_number)
                 #write the distance and time to aws database
                 cursor.execute('''
                 insert into level_data(date,level) values (%s,%s)
@@ -56,7 +68,6 @@ if __name__ == '__main__':
         # Reset by pressing CTRL + C
         except KeyboardInterrupt:
             print("Measurement stopped by User")
-            GPIO.cleanup()
             db.close()
             print('database connection closed')
 
