@@ -28,7 +28,7 @@ def get_latest_level():
         data = connection.execute(query)
         for date,level in data:
             latest_date = date
-            latest_level = level
+            latest_level = round(level,1)
         return (latest_date.strftime('%m/%d/%Y %H:%M:%S'),str(latest_level))
 
 def get_atm_data():
