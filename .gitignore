@@ -1,3 +1,6 @@
 super_secret.py
 __pycache__/
 calibration_plot.py
+.gitignore
+.gitattributes
+/venv/
