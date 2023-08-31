@@ -18,7 +18,6 @@ def plot():
 
     x = pd.to_datetime(df["date"])
     y = df["level"]
-    y = y.rolling(window=3).mean()
     y2 = df2["temp"]
     x2 = df2["date"]
     # Create a new plot with a dark background
