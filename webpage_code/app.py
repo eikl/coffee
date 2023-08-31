@@ -37,7 +37,7 @@ def home():
         return render_template('korsi.html', date=date, level=level,
                             script=script,div=div,temperature=temperature)
     else:
-        return render_template('korsi.html', date=date, level=level,
+        return render_template('index.html', date=date, level=level,
                             script=script,div=div,temperature=temperature)
 
 if __name__ == "__main__":
