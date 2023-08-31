@@ -9,10 +9,13 @@ import pymysql
 import super_secret 
 
 #connect to jeff bezos
-
-db = super_secret.db
-cursor = db.cursor()
-cursor.execute('USE srf05_data')
+try:
+    db = super_secret.db
+    cursor = db.cursor()
+    cursor.execute('USE srf05_data')
+except:
+    print("Couldn't connect to database")
+    quit()
 
 #
 # Initialize i2c bus and sensor
@@ -38,33 +41,45 @@ def calibration(distance):
     return ammount_of_coffee
 
 def distance(sample_length):
+    #
+    # Take sample_length ammount of measurements. 
+    # wait 1 second between measurements
+    #
     samples = []
-    # take i measurements, 1 measurement is 1 second
     for i in range(sample_length):
-        samples.append(vl53.range)
+        samples.append(calibration(vl53.range))
+        time.sleep(1)
     # return the average
     return np.average(samples)
 
  
 if __name__ == '__main__':
-    #
-    # Take 10 1 second samples
-    #
     sample_number = 10
     with open('out.txt','w') as file:
+
+        current_day = dt.datetime.now().weekday()
+
+        viikonloppu = current_day >= 5
+        
         file.write('time,distance\n')
         try:
-            while True:
+            while not viikonloppu:
                 #Get the time before the measuremnet starts
+
                 now = dt.datetime.now()
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
                 dist = distance(sample_length=sample_number)
+
                 #write the distance and time to aws database
-                cursor.execute('''
-                insert into level_data(date,level) values (%s,%s)
-                ''',(current_date,dist))
-                db.commit()
+                try:
+                    cursor.execute('''
+                    insert into level_data(date,level) values (%s,%s)
+                    ''',(current_date,dist))
+                    db.commit()
+                except:
+                    print("Couldn't connect to database")
                 print(f'distance from sensor is {distance}')
+
         # Reset by pressing CTRL + C
         except KeyboardInterrupt:
             print("Measurement stopped by User")

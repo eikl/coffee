@@ -4,18 +4,41 @@ import datetime as dt
 import sql_queries
 import bokeh_figure as bokeh
 application = Flask(__name__)
+
+def korsi_check():
+    now = dt.datetime.now()
+    if now.weekday() == 4:  # Monday is 0 and Sunday is 6
+        if now.hour >= 16:
+            return True
+    return False
 #
 # This gives the latest coffee level
 #
 @application.route('/')
 def home():
-    script,div = bokeh.plot()
-    date,level = sql_queries.get_latest_level()
-    atm_df = sql_queries.get_atm_data()
-    temperature = round(float(atm_df["temp"].iloc[-1]),1)
-    print(atm_df)
-    return render_template('index.html', date=date, level=level,
-                           script=script,div=div,temperature=temperature)
+    current_day = dt.datetime.now().weekday()
+
+    viikonloppu = current_day >= 5
+    
+    if not viikonloppu:
+        try:
+            script,div = bokeh.plot()
+            date,level = sql_queries.get_latest_level()
+            atm_df = sql_queries.get_atm_data()
+            temperature = round(float(atm_df["temp"].iloc[-1]),1)
+        except:
+            return render_template('no_internet.html')
+
+    korsi_time = korsi_check()
+
+    if viikonloppu:
+        return render_template('vklp.html')
+    if korsi_time:
+        return render_template('korsi.html', date=date, level=level,
+                            script=script,div=div,temperature=temperature)
+    else:
+        return render_template('korsi.html', date=date, level=level,
+                            script=script,div=div,temperature=temperature)
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0',port=8080)

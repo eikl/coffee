@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>OH:n kahvitilanne</h1>
+    <p> 
+        Oljenkorsi kutsuu...
+    </p>
+    <p>
+        Kun kello löi {{ date }} kahvia oli pannussa {{ level }} kuppia.
+    </p>
+    <!-- Embed Bokeh plot. -->
+    {{ script | safe }}
+    {{ div | safe }}
+{% endblock %}
