@@ -48,7 +48,6 @@ def distance(sample_length):
     samples = []
     for i in range(sample_length):
         samples.append(calibration(vl53.range))
-        time.sleep(1)
     # return the average
     return np.average(samples)
 
@@ -68,7 +67,7 @@ if __name__ == '__main__':
 
                 now = dt.datetime.now()
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
-                dist = distance(sample_length=sample_number)
+                dist = distance(100)
 
                 #write the distance and time to aws database
                 try:
@@ -78,7 +77,7 @@ if __name__ == '__main__':
                     db.commit()
                 except:
                     print("Couldn't connect to database")
-                print(f'distance from sensor is {distance}')
+                print(f'distance from sensor is {dist}')
 
         # Reset by pressing CTRL + C
         except KeyboardInterrupt:
