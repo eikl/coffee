@@ -37,7 +37,8 @@ def plot():
     
     print(p.xaxis[0].formatter)
     # Add a line renderer with legend and line thickness
-    p.xaxis[0].formatter = DatetimeTickFormatter(minsec='%H:%M:%S',hourmin='%H:%M:%S',seconds='%H:%M:%S')
+    p.xaxis[0].formatter = DatetimeTickFormatter(minsec='%H:%M:%S',hourmin='%H:%M:%S',seconds='%H:%M:%S',
+                                                 minutes = '%H:%M:%S')
 
     
     p.line(x, y, line_width=2, line_color="#f5f6fa")
