@@ -78,7 +78,7 @@ if __name__ == '__main__':
                     db.commit()
                 except:
                     print("Couldn't connect to database")
-                print(f'distance from sensor is {distance}')
+                print(f'distance from sensor is {dist}')
 
         # Reset by pressing CTRL + C
         except KeyboardInterrupt:
