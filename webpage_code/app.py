@@ -10,7 +10,10 @@ def korsi_check():
     if now.weekday() == 4:  # Monday is 0 and Sunday is 6
         if now.hour >= 16:
             return True
-    return False
+        else:
+            return False
+    else:
+        return False
 #
 # This gives the latest coffee level
 #
