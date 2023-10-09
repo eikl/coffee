@@ -34,7 +34,7 @@ def home():
 
     korsi_time = korsi_check()
 
-    if viikonloppu:
+    if  viikonloppu:
         return render_template('vklp.html')
     if korsi_time:
         return render_template('korsi.html', date=date, level=level,
