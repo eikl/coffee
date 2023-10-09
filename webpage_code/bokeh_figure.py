@@ -23,7 +23,7 @@ def plot():
     #x2 = df2["date"]
     # Create a new plot with a dark background
     p = figure(x_axis_label='Aika', 
-               y_axis_label='Kahvin määrä',
+               y_axis_label='Etäisyys anturista',
                x_axis_type = 'datetime',
                width=700,
                height=400,
