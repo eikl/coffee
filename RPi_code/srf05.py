@@ -35,9 +35,9 @@ def calibration(distance):
     # This function calculates the ammount of coffee in the pan
     # based on a calibration
     # The calibration procedure is described in README.md
-    k = -1.182135711619752
-    b = 17.904981518515626
-    ammount_of_coffee = (distance/10)*k+b
+    k = -1.11361
+    b = 18.39
+    ammount_of_coffee = (distance)*k+b
     return ammount_of_coffee
 
 def distance(sample_length):
@@ -47,9 +47,10 @@ def distance(sample_length):
     #
     samples = []
     for i in range(sample_length):
-        samples.append(calibration(vl53.range))
+        #samples.append(calibration(vl53.range))
+        samples.append(vl53.range)
     # return the average
-    return np.average(samples)
+    return np.average(samples)/10
 
  
 if __name__ == '__main__':
@@ -67,17 +68,18 @@ if __name__ == '__main__':
 
                 now = dt.datetime.now()
                 current_date = now.strftime('%Y-%m-%d %H:%M:%S')
-                dist = distance(100)
+                dist = distance(1)
+                ammount = calibration(dist)
 
                 #write the distance and time to aws database
                 try:
                     cursor.execute('''
                     insert into level_data(date,level) values (%s,%s)
-                    ''',(current_date,dist))
+                    ''',(current_date,ammount))
                     db.commit()
                 except:
                     print("Couldn't connect to database")
-                print(f'distance from sensor is {dist}')
+                print(f'there is  {ammount} cups',end='\r')
 
         # Reset by pressing CTRL + C
         except KeyboardInterrupt:
