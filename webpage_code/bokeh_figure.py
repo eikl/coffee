@@ -30,7 +30,7 @@ def plot():
                background_fill_color = '#2f3640',
                border_fill_color = '#2f3640',
                outline_line_color = '#2f3640',
-               #y_range = Range1d(0,10),
+               y_range = Range1d(0,20),
                active_drag = None,
                active_scroll = None,
                active_tap = None
