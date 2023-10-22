@@ -23,7 +23,7 @@ def home():
 
     viikonloppu = current_day >= 5
     
-    if not viikonloppu:
+    if True:
         try:
             script,div = bokeh.plot()
             date,level = sql_queries.get_latest_level()
@@ -34,8 +34,6 @@ def home():
 
     korsi_time = korsi_check()
 
-    if  viikonloppu:
-        return render_template('vklp.html')
     if korsi_time:
         return render_template('korsi.html', date=date, level=level,
                             script=script,div=div,temperature=temperature)
