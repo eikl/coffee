@@ -5,6 +5,8 @@ import sql_queries
 import bokeh_figure as bokeh
 application = Flask(__name__)
 
+broken = True
+
 def korsi_check():
     now = dt.datetime.now()
     if now.weekday() == 4:  # Monday is 0 and Sunday is 6
@@ -23,7 +25,7 @@ def home():
 
     viikonloppu = current_day >= 5
     
-    if True:
+    if not broken:
         try:
             script,div = bokeh.plot()
             date,level = sql_queries.get_latest_level()
@@ -31,15 +33,8 @@ def home():
             temperature = round(float(atm_df["temp"].iloc[-1]),1)
         except:
             return render_template('no_internet.html')
-
-    korsi_time = korsi_check()
-
-    if korsi_time:
-        return render_template('korsi.html', date=date, level=level,
-                            script=script,div=div,temperature=temperature)
     else:
-        return render_template('index.html', date=date, level=level,
-                            script=script,div=div,temperature=temperature)
+        return render_template('broken.html')
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0',port=8080)
