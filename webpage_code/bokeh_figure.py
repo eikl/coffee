@@ -18,19 +18,19 @@ def plot():
 
     x = pd.to_datetime(df["date"])
     y = df["level"]
-    y = y.rolling(window=10).mean()
+    y = y.rolling(window=15).mean()
     #y2 = df2["temp"]
     #x2 = df2["date"]
     # Create a new plot with a dark background
     p = figure(x_axis_label='Aika', 
-               y_axis_label='Etäisyys anturista (cm)',
+               y_axis_label='Kahvin määrä (kupit)',
                x_axis_type = 'datetime',
                width=700,
                height=400,
                background_fill_color = '#2f3640',
                border_fill_color = '#2f3640',
                outline_line_color = '#2f3640',
-               y_range = Range1d(0,20),
+               y_range = Range1d(0,12),
                active_drag = None,
                active_scroll = None,
                active_tap = None
