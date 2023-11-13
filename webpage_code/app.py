@@ -5,7 +5,7 @@ import sql_queries
 import bokeh_figure as bokeh
 application = Flask(__name__)
 
-broken = True
+broken = False
 
 def korsi_check():
     now = dt.datetime.now()
@@ -29,8 +29,9 @@ def home():
         try:
             script,div = bokeh.plot()
             date,level = sql_queries.get_latest_level()
-            atm_df = sql_queries.get_atm_data()
-            temperature = round(float(atm_df["temp"].iloc[-1]),1)
+            #atm_df = sql_queries.get_atm_data()
+            #temperature = round(float(atm_df["temp"].iloc[-1]),1)
+            return render_template('index.html', date=date, level=level, script=script, div=div)
         except:
             return render_template('no_internet.html')
     else:
