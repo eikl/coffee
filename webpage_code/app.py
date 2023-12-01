@@ -98,8 +98,8 @@ def logout():
 @application.route('/nuke', methods=['POST'])
 @login_required
 def nuke():
-    #sql_queries.nuke()
-    return render_template('broken.html')
+    sql_queries.nuke()
+    return render_template('nuked.html')
 
 
 if __name__ == "__main__":
