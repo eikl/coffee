@@ -45,11 +45,12 @@ def lataus():
     df = sql_queries.get_all_data()
     # d = {'col1': [1, 2], 'col2': [3, 4]}
     # df = pd.DataFrame(data=d)
+    filename = dt.datetime.now().strftime('%m/%d/%Y')
     return Response(
         df.to_csv(),
         mimetype="text/csv",
         headers={"Content-disposition":
-        "attachment; filename=filename.csv"})
+        f"attachment; filename={filename}.csv"})
 
 
 # @application.route('/nuke')
