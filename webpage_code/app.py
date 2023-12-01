@@ -55,7 +55,7 @@ def lataus():
 @application.route('/nuke')
 def nuke():
     sql_queries.nuke()
-    render_template('broken.html')
+    return render_template('broken.html')
 
 
 if __name__ == "__main__":
