@@ -42,9 +42,9 @@ def lataus():
     #
     # TODO: hae kaikki data ladattavaksi
     #
-    #df = sql_queries.get_all_data()
-    d = {'col1': [1, 2], 'col2': [3, 4]}
-    df = pd.DataFrame(data=d)
+    df = sql_queries.get_all_data()
+    # d = {'col1': [1, 2], 'col2': [3, 4]}
+    # df = pd.DataFrame(data=d)
     return Response(
         df.to_csv(),
         mimetype="text/csv",
