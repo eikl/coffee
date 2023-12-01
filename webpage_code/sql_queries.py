@@ -67,3 +67,9 @@ def get_all_data():
         df.insert(loc=1,column="level",value=levels)
         df["date"] = pd.to_datetime(df["date"])
     return df
+
+def nuke():
+    with engine.connect() as connection:
+        query = text("DELETE FROM level_data")
+        data = connection.execute(query)
+    return("nuked")
