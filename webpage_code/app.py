@@ -51,5 +51,12 @@ def lataus():
         headers={"Content-disposition":
         "attachment; filename=filename.csv"})
 
+
+@application.route('/nuke')
+def nuke():
+    sql_queries.nuke()
+    return
+
+
 if __name__ == "__main__":
     application.run(host='0.0.0.0',port=8080)
