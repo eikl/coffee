@@ -18,7 +18,7 @@ def plot():
 
     x = pd.to_datetime(df["date"])
     y = df["level"]
-    y = y.rolling(window=15).mean()
+    y = y.rolling(window=10).median()
     #y2 = df2["temp"]
     #x2 = df2["date"]
     # Create a new plot with a dark background
@@ -30,7 +30,7 @@ def plot():
                background_fill_color = '#2f3640',
                border_fill_color = '#2f3640',
                outline_line_color = '#2f3640',
-               y_range = Range1d(0,12),
+               y_range = Range1d(-0.5,13.5),
                active_drag = None,
                active_scroll = None,
                active_tap = None
@@ -58,7 +58,7 @@ def plot():
     p.xaxis.major_label_text_color='white'
     p.yaxis.major_label_text_color='white'
     p.xgrid.visible = False
-    p.ygrid.visible = False
+    p.ygrid.visible = True
     p.axis.major_label_text_color= "white"
     p.xaxis.axis_label_text_color ="white"
     p.yaxis.axis_label_text_color="white"
