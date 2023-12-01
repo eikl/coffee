@@ -1,11 +1,22 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request, redirect, url_for, abort
 import pandas as pd
 import datetime as dt
 import sql_queries
 import bokeh_figure as bokeh
+from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required
+import super_secret
 application = Flask(__name__)
+application.secret_key = super_secret.key
+
+login_manager = LoginManager()
+login_manager.init_app(application)
+
 
 broken = False
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
 
 def korsi_check():
     now = dt.datetime.now()
@@ -16,6 +27,12 @@ def korsi_check():
             return False
     else:
         return False
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User(user_id)
+
+
 #
 # This gives the latest coffee level
 #
@@ -52,11 +69,37 @@ def lataus():
         headers={"Content-disposition":
         f"attachment; filename={filename}.csv"})
 
+@application.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == 'admin' and password == super_secret.password:  # Replace with your desired credentials
+            user = User(id=1)
+            login_user(user)
+            return redirect(url_for('admin_panel'))
+            print('success')
+            return 0
+        else:
+            return abort(401)  # Unauthorized access
+    return render_template('admin_login.html')
 
-# @application.route('/nuke')
-# def nuke():
-#     sql_queries.nuke()
-#     return render_template('broken.html')
+@application.route('/admin_panel')
+@login_required
+def admin_panel():
+    return render_template('admin_panel.html')
+
+@application.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+@application.route('/nuke', methods=['POST'])
+@login_required
+def nuke():
+    #sql_queries.nuke()
+    return render_template('broken.html')
 
 
 if __name__ == "__main__":
