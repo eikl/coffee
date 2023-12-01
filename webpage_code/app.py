@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 import pandas as pd
 import datetime as dt
 import sql_queries
@@ -42,7 +42,13 @@ def lataus():
     #
     # TODO: hae kaikki data ladattavaksi
     #
-    return render_template('no_internet.html')
+    df = sql_queries.get_all_data()
+
+    return Response(
+        df.to_csv(),
+        mimetype="text/csv",
+        headers={"Content-disposition":
+        "attachment; filename=filename.csv"})
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0',port=8080)

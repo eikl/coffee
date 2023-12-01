@@ -52,3 +52,18 @@ def get_atm_data():
         df["date"] = pd.to_datetime(df["date"])
         print(df)
     return df
+
+def get_all_data():
+    with engine.connect() as connection:
+        query = text("SELECT * FROM level_data ORDER BY date")
+        data = connection.execute(query)
+        dates = []
+        levels = []
+        for date,level in data:
+            dates.append(date)
+            levels.append(level)
+        df = pd.DataFrame()
+        df.insert(loc=0,column="date",value=dates)
+        df.insert(loc=1,column="level",value=levels)
+        df["date"] = pd.to_datetime(df["date"])
+    return df
