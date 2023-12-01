@@ -42,8 +42,8 @@ def lataus():
     #
     # TODO: hae kaikki data ladattavaksi
     #
-    df = sql_queries.get_all_data()
-
+    #df = sql_queries.get_all_data()
+    df = df.DataFrame()
     return Response(
         df.to_csv(),
         mimetype="text/csv",
