@@ -52,10 +52,10 @@ def lataus():
         "attachment; filename=filename.csv"})
 
 
-@application.route('/nuke')
-def nuke():
-    sql_queries.nuke()
-    return render_template('broken.html')
+# @application.route('/nuke')
+# def nuke():
+#     sql_queries.nuke()
+#     return render_template('broken.html')
 
 
 if __name__ == "__main__":
