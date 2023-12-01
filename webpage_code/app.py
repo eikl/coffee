@@ -36,6 +36,13 @@ def home():
             return render_template('no_internet.html')
     else:
         return render_template('broken.html')
+    
+@application.route('/lataa')
+def lataus():
+    #
+    # TODO: hae kaikki data ladattavaksi
+    #
+    return render_template('no_internet.html')
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0',port=8080)
