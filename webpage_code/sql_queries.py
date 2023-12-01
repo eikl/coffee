@@ -72,4 +72,4 @@ def nuke():
     with engine.connect() as connection:
         query = text("DELETE FROM level_data")
         data = connection.execute(query)
-    return("nuked")
+    return 0
