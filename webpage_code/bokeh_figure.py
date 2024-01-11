@@ -43,17 +43,17 @@ def plot():
                                                  minutes = '%H:%M:%S')
 
     
-    p.line(x2, y22, line_width=2, line_color="#f5f6fa")
+    p.line(x2, y2, line_width=2, line_color="#f5f6fa",legend_label="VOC indeksi")
 
-    #p.extra_y_ranges['temp'] = Range1d(0,100)
-    #p.line(x, y2, color="orange", y_range_name="temp")
+    p.extra_y_ranges['rh'] = Range1d(0,100)
+    p.line(x2, y22, color="orange", y_range_name="rh",legend_label="RH")
 
-    #ax2 = LinearAxis(y_range_name="temp", axis_label="Lämpötila (C)")
-    #ax2.axis_label_text_color ="navy"
-    #p.add_layout(ax2, 'right')
+    ax2 = LinearAxis(y_range_name="rh", axis_label="RH (%)")
+    ax2.axis_label_text_color ="navy"
+    p.add_layout(ax2, 'right')
 
 
-    #p.yaxis[0].formatter = NumeralTickFormatter(format='0.00')
+    p.yaxis[0].formatter = NumeralTickFormatter(format='0.00')
     p.toolbar_location = None
     p.toolbar.logo = None
     p.xaxis.major_label_text_color='white'
@@ -65,6 +65,17 @@ def plot():
     p.yaxis.axis_label_text_color="white"
     p.xaxis.axis_line_color = "white"
     p.yaxis.axis_line_color= "white"
+
+    p.legend.location = "top_left"
+    p.legend.label_text_font = "times"
+    p.legend.label_text_font_style = "italic"
+    p.legend.label_text_color = "white"
+
+    p.legend.border_line_width = 3
+    p.legend.border_line_color = None
+    p.legend.border_line_alpha = 0.8
+    p.legend.background_fill_color = "navy"
+    p.legend.background_fill_alpha = 0
     # Generate the components of the plot
     script, div = components(p)
     return script,div

@@ -46,9 +46,9 @@ def get_atm_data():
             rhs.append(rh)
         df = pd.DataFrame()
         df.insert(loc=0,column="date",value=dates)
-        df.insert(loc=1,column="temp",value=vocs)
-        df.insert(loc=2,column="hum",value=pms)
-        df.insert(loc=3,column="pres",value=rhs)
+        df.insert(loc=1,column="voc",value=vocs)
+        df.insert(loc=2,column="pm",value=pms)
+        df.insert(loc=3,column="rh",value=rhs)
         df["date"] = pd.to_datetime(df["date"])
         print(df)
     return df
