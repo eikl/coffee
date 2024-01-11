@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 #import pandas as pd
 plt.rc('font', weight='bold')
-with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/measurements.csv', 'w', newline='') as file:
+with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/measurements.csv', 'a', newline='') as file:
     device = Sen5xI2cDevice(I2cConnection(i2c_transceiver))
     serial = i2c(port=1, address=0x3C)
     screen=sh1106(serial)
