@@ -34,7 +34,7 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/
 
         # Read measured values -> clears the "data ready" flag
         values = device.read_measured_values()
-
+        print(values)
         # Access a specific value separately (see Sen5xMeasuredValues)
         mass_concentration = values.mass_concentration_2p5.physical
         pm10 = values.mass_concentration_10p0.physical
