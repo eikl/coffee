@@ -57,8 +57,8 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/
         #write the distance and time to aws database
         try:
            cursor.execute('''
-           insert into level_data(date,level) values (%s,%s)
-           ''',(time.strftime("%Y-%m-%d %H:%M:%S"),voc))
+           insert into atm_data(date,voc,rh) values (%s,%s,%s)
+           ''',(time.strftime("%Y-%m-%d %H:%M:%S"),voc,ambient_rh))
            db.commit()
         except:
             print("Couldn't connect to database")

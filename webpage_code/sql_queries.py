@@ -36,19 +36,19 @@ def get_atm_data():
         query = text('SELECT * FROM atm_data ORDER BY date DESC LIMIT 100')
         data = connection.execute(query)
         dates = []
-        temps = []
-        hums = []
-        pres = []
-        for date, temperature, humidity, pressure in data:
+        vocs = []
+        pms = []
+        rhs = []
+        for date, voc, pm25, rh in data:
             dates.append(date)
-            temps.append(temperature)
-            hums.append(humidity)
-            pres.append(pressure)
+            vocs.append(voc)
+            pms.append(pm25)
+            rhs.append(rh)
         df = pd.DataFrame()
         df.insert(loc=0,column="date",value=dates)
-        df.insert(loc=1,column="temp",value=temps)
-        df.insert(loc=2,column="hum",value=hums)
-        df.insert(loc=3,column="pres",value=pres)
+        df.insert(loc=1,column="temp",value=vocs)
+        df.insert(loc=2,column="hum",value=pms)
+        df.insert(loc=3,column="pres",value=rhs)
         df["date"] = pd.to_datetime(df["date"])
         print(df)
     return df
