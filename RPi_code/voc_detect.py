@@ -44,7 +44,7 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/
         nox = values.nox_index
         writer.writerow([time.strftime("%Y-%m-%d %H:%M:%S"), mass_concentration, ambient_temperature, ambient_rh,voc,nox])
         print(len(timelist))
-        if len(timelist) > 100:
+        if True:
             with canvas(screen) as draw:
                 draw.rectangle(screen.bounding_box, outline='white', fill='black')
                 draw.text((0,30), f'PM2.5: {mass_concentration}, PM10: {pm10}',fill='white')
