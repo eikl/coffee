@@ -43,6 +43,7 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/
         voc = values.voc_index.scaled
         nox = values.nox_index
         writer.writerow([time.strftime("%Y-%m-%d %H:%M:%S"), mass_concentration, ambient_temperature, ambient_rh,voc,nox])
+        print(len(timelist))
         if len(timelist) > 100:
             with canvas(screen) as draw:
                 draw.rectangle(screen.bounding_box, outline='white', fill='black')
