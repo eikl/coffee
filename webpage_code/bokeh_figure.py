@@ -19,8 +19,9 @@ def plot():
     x = pd.to_datetime(df["date"])
     y = df["level"]
     y = y.rolling(window=10).median()
-    #y2 = df2["temp"]
-    #x2 = df2["date"]
+    y2 = df2["voc"]
+    y22 = df2["rh"]
+    x2 = df2["date"]
     # Create a new plot with a dark background
     p = figure(x_axis_label='Aika', 
                y_axis_label='VOC indeksi',
@@ -42,7 +43,7 @@ def plot():
                                                  minutes = '%H:%M:%S')
 
     
-    p.line(x, y, line_width=2, line_color="#f5f6fa")
+    p.line(x2, y22, line_width=2, line_color="#f5f6fa")
 
     #p.extra_y_ranges['temp'] = Range1d(0,100)
     #p.line(x, y2, color="orange", y_range_name="temp")
