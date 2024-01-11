@@ -6,16 +6,16 @@ import adafruit_vl53l0x
 import datetime as dt
 import numpy as np
 import pymysql
-import super_secret 
+#import super_secret 
 
 #connect to jeff bezos
-try:
-    db = super_secret.db
-    cursor = db.cursor()
-    cursor.execute('USE srf05_data')
-except:
-    print("Couldn't connect to database")
-    quit()
+#try:
+#    db = super_secret.db
+#    cursor = db.cursor()
+#    cursor.execute('USE srf05_data')
+#except:
+#    print("Couldn't connect to database")
+#    quit()
 
 #
 # Initialize i2c bus and sensor
@@ -72,14 +72,15 @@ if __name__ == '__main__':
                 ammount = calibration(dist)
 
                 #write the distance and time to aws database
-                try:
-                    cursor.execute('''
-                    insert into level_data(date,level) values (%s,%s)
-                    ''',(current_date,ammount))
-                    db.commit()
-                except:
-                    print("Couldn't connect to database")
-                print(f'there is  {ammount} cups',end='\r')
+                #try:
+                #    cursor.execute('''
+                #    insert into level_data(date,level) values (%s,%s)
+                #    ''',(current_date,ammount))
+                #    db.commit()
+                #except:
+                #    print("Couldn't connect to database")
+                #print(f'there is  {ammount} cups',end='\r')
+                print(f"distance is {dist}")
 
         # Reset by pressing CTRL + C
         except KeyboardInterrupt:
