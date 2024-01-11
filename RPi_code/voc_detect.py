@@ -7,8 +7,19 @@ from luma.core.render import canvas
 import datetime as dt
 from luma.oled.device import sh1106
 import matplotlib.pyplot as plt
-from PIL import Image
-#import pandas as pd
+import pymysql
+import super_secret 
+
+try:
+   db = super_secret.db
+   cursor = db.cursor()
+   cursor.execute('USE srf05_data')
+except:
+   print("Couldn't connect to database")
+   quit()
+
+
+
 plt.rc('font', weight='bold')
 with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/measurements.csv', 'a', newline='') as file:
     device = Sen5xI2cDevice(I2cConnection(i2c_transceiver))
@@ -43,7 +54,14 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver, open('/home/pi/oh_aq/
         voc = values.voc_index.scaled
         nox = values.nox_index
         writer.writerow([time.strftime("%Y-%m-%d %H:%M:%S"), mass_concentration, ambient_temperature, ambient_rh,voc,nox])
-        print(len(timelist))
+        #write the distance and time to aws database
+        try:
+           cursor.execute('''
+           insert into level_data(date,level) values (%s,%s)
+           ''',(time.strftime("%Y-%m-%d %H:%M:%S"),voc))
+           db.commit()
+        except:
+            print("Couldn't connect to database")
         if True:
             with canvas(screen) as draw:
                 draw.rectangle(screen.bounding_box, outline='white', fill='black')

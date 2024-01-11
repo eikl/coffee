@@ -9,13 +9,13 @@ import pymysql
 #import super_secret 
 
 #connect to jeff bezos
-#try:
-#    db = super_secret.db
-#    cursor = db.cursor()
-#    cursor.execute('USE srf05_data')
-#except:
-#    print("Couldn't connect to database")
-#    quit()
+try:
+   db = super_secret.db
+   cursor = db.cursor()
+   cursor.execute('USE srf05_data')
+except:
+   print("Couldn't connect to database")
+   quit()
 
 #
 # Initialize i2c bus and sensor
