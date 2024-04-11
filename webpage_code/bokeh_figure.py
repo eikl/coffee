@@ -26,7 +26,7 @@ def plot():
     print(x,y)
     # Create a new plot with a dark background
     p = figure(x_axis_label='Aika', 
-               y_axis_label='VOC indeksi',
+               y_axis_label='Kahvi',
                x_axis_type = 'datetime',
                width=700,
                height=400,
@@ -44,7 +44,7 @@ def plot():
                                                  minutes = '%H:%M:%S')
 
     
-    p.scatter(x, y,legend_label="VOC indeksi")
+    p.scatter(x, y,legend_label="Kahvin määrä")
 
 
 
