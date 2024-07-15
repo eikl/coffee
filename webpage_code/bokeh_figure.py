@@ -19,14 +19,12 @@ def plot():
 
     df = sql_queries.get_level_data()
     # df2 = sql_queries.get_atm_data()
-
     x = pd.to_datetime(df['date'])
-    y = df["level"]
-    y = y.rolling(window=10).median()
-    print(x,y)
+    y1 = df["temp1"]
+    y2 = df['temp2']
     # Create a new plot with a dark background
     p = figure(x_axis_label='Aika', 
-               y_axis_label='Kahvi',
+               y_axis_label='Lämpötila',
                x_axis_type = 'datetime',
                width=700,
                height=400,
@@ -35,17 +33,18 @@ def plot():
                outline_line_color = '#2f3640',
                active_drag = None,
                active_scroll = None,
-               active_tap = None
+               active_tap = None,
+               y_range=(20,60)
                )
     
-    print(p.xaxis[0].formatter)
+
     # Add a line renderer with legend and line thickness
     p.xaxis[0].formatter = DatetimeTickFormatter(minsec='%H:%M:%S',hourmin='%H:%M:%S',seconds='%H:%M:%S',
                                                  minutes = '%H:%M:%S')
 
     
-    p.scatter(x, y,legend_label="Kahvin määrä")
-
+    p.line(x, y1,legend_label="Pannun 1 lämpötila",color = 'white')
+    p.line(x, y2,legend_label="Pannun 2 lämpötila")
 
 
 
@@ -57,7 +56,7 @@ def plot():
     p.xaxis.major_label_text_color='white'
     p.yaxis.major_label_text_color='white'
     p.xgrid.visible = False
-    p.ygrid.visible = True
+    p.ygrid.visible = False
     p.axis.major_label_text_color= "white"
     p.xaxis.axis_label_text_color ="white"
     p.yaxis.axis_label_text_color="white"

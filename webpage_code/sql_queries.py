@@ -1,6 +1,7 @@
 import super_secret
 from sqlalchemy import text, create_engine
 import pandas as pd
+import datetime as dt
 from flask_sqlalchemy import SQLAlchemy
 
 DATABASE_URL = super_secret.DATABASE_URL
@@ -12,13 +13,16 @@ def get_level_data():
         query = text("SELECT * FROM level_data ORDER BY date DESC LIMIT 350")
         data = connection.execute(query)
         dates = []
-        levels = []
-        for date,level in data:
+        temp1 = []
+        temp2 = []
+        for date,temp_1,temp_2 in data:
             dates.append(date)
-            levels.append(level)
+            temp1.append(temp_1)
+            temp2.append(temp_2)
         df = pd.DataFrame()
         df.insert(loc=0,column="date",value=dates)
-        df.insert(loc=1,column="level",value=levels)
+        df.insert(loc=1,column="temp1",value=temp1)
+        df.insert(loc=2,column='temp2',value = temp2)
         df["date"] = pd.to_datetime(df["date"])
     return df
 
@@ -26,10 +30,9 @@ def get_latest_level():
     with engine.connect() as connection:
         query = text('SELECT * FROM level_data ORDER BY date DESC LIMIT 1')
         data = connection.execute(query)
-        for date,level in data:
-            latest_date = date
-            latest_level = round(level,1)
-        return (latest_date.strftime('%m/%d/%Y %H:%M:%S'),str(latest_level))
+        latest_date = dt.datetime.now()
+        latest_temp1 = 0
+        return (latest_date.strftime('%m/%d/%Y %H:%M:%S'),str(latest_temp1))
 
 def get_atm_data():
     with engine.connect() as connection:
@@ -50,7 +53,6 @@ def get_atm_data():
         df.insert(loc=2,column="pm",value=pms)
         df.insert(loc=3,column="rh",value=rhs)
         df["date"] = pd.to_datetime(df["date"])
-        print(df)
     return df
 
 def get_all_data():

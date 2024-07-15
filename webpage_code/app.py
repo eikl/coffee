@@ -45,13 +45,8 @@ def home():
     if not broken:
         try:
             script,div = bokeh.plot()
-            date,level = sql_queries.get_latest_level()
-            #atm_df = sql_queries.get_atm_data()
-            # voc = atm_df["voc"]
-            # pm25 = atm_df["pm25"]
-            # rh = atm_df["rh"]
-            #temperature = round(float(atm_df["temp"].iloc[-1]),1)
-            return render_template('index.html', date=date, level=level, script=script, div=div)
+            date,temp1 = sql_queries.get_latest_level()
+            return render_template('index.html', date=date, level=temp1, script=script, div=div)
         except Exception as e:
             print(e)
             return render_template('no_internet.html')
