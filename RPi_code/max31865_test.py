@@ -21,8 +21,10 @@ except:
 
 # Create sensor object, communicating over the board's default SPI bus
 spi = board.SPI()
-cs = digitalio.DigitalInOut(board.D22)  # Chip select of the MAX31865 board.
-sensor = adafruit_max31865.MAX31865(spi, cs)
+cs1 = digitalio.DigitalInOut(board.D22)  # Chip select of the MAX31865 board.
+cs2 = digitalio.DigitalInOut(board.D27)
+sensor1 = adafruit_max31865.MAX31865(spi, cs1)
+sensor2 = adafruit_max31865.MAX31865(spi, cs2)
 # Note you can optionally provide the thermocouple RTD nominal, the reference
 # resistance, and the number of wires for the sensor (2 the default, 3, or 4)
 # with keyword args:
@@ -31,12 +33,14 @@ sensor = adafruit_max31865.MAX31865(spi, cs)
 # Main loop to print the temperature every second.
 while True:
     # Read temperature.
-    temp = sensor.temperature
-    print(temp)
+    temp1 = sensor1.temperature
+    temp2 = sensor2.temperature
+    print(temp1,temp2)
     current_date = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     try:
-        cursor.execute("insert into level_data(date,level) values (%s,%s)",(current_date,temp))
+        cursor.execute("insert into level_data(date,temp_1,temp_2) values (%s,%s,%s)",(current_date,temp1,temp2))
+        #cursor.execute('insert into level_data(date,temp_2) values (%s,%s)',(current_date,temp2))
         db.commit()
     except:
         print('could not connect to db')
-    time.sleep(15)
+    time.sleep(1)
