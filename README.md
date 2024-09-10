@@ -1,5 +1,5 @@
-
-
+# This repo is archived, and moved to github.com/eikl/coffee-temp
+ 
 # Coffee level monitoring application
 
 # Table of Contents
